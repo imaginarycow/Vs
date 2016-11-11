@@ -17,16 +17,24 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         scene = MainScene()
-        let view = self.view as! SKView?
-            
-        // Set the scale mode to scale to fit the window
+        
+        // Configure the view.
+        let skView = self.view as! SKView
+        skView.isMultipleTouchEnabled = true
+        skView.showsFPS = false
+        skView.showsNodeCount = true
+        skView.showsPhysics = true
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        //scene.physicsWorld.gravity = CGVector(dx: 0.0,dy: 0.0)
+        scene.physicsBody?.affectedByGravity = true
+        
+        /* Set the scale mode to scale to fit the window */
+        scene.size = skView.bounds.size
         scene.scaleMode = .aspectFill
-                
-        // Present the scene
-        view?.presentScene(scene)
-        view?.ignoresSiblingOrder = true
-        view?.showsFPS = true
-        view?.showsNodeCount = true
+        skView.presentScene(scene)
+
         
     }
 
